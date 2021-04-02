@@ -1,0 +1,156 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+header{
+    width: 100%;
+    height: 50px;
+    background: rgb(38, 39, 38);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #ccc;
+}
+
+.header-item {
+    padding: 1em;
+}
+header h1{
+    margin: 0 20px;
+    color: white;
+}
+header a {
+    text-decoration: none;
+}
+
+header a h1:hover, header a h2:hover {
+    color:#950740;
+}
+
+#log-out {
+    color: white;
+    position: relative;
+    left: 240px;
+}
+
+header form{
+    display: flex;
+    align-items: center;
+}
+/* The search bar */
+#search{
+    width: 230px;
+    height: 30px;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 20px;
+    padding-left: 15px;
+}
+
+main{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+main div{
+    width: 250px;
+    height: 320px;
+    margin: 19px 15px;
+    background: #C3073F;
+    position:relative;
+}
+
+img{
+    width: 100%;
+    height: 89%;
+    object-fit: cover;
+}
+
+.movie-box {
+    overflow-y: auto;
+}
+
+.movie-box img {
+    transition: .3s ease;
+}
+
+.movie-box:hover img {
+    opacity: 0.15;
+}
+
+.movie-box:hover a {
+    z-index: 2;
+}
+
+.movie-box > p {
+    opacity: 0;
+    position: absolute;
+    transition: .3s ease;
+    padding: 15px;
+    color: #fff;
+}
+
+.movie-box:hover p {
+    opacity: .99;
+    z-index: 1
+}
+
+h2{
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.movie-box:hover h2 {
+    opacity: .15;
+}
+
+#watch-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    width: 30px;
+    background-color: #555555;
+    opacity: .1;
+}
+
+#watch-button:hover {
+    opacity: 1;
+}
+
+#fav-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 8px;
+    border: none;
+    top: 35px;
+    height: 30px;
+    width: 30px;
+    background-color: #555555;
+    color: yellow;
+    opacity: .1;
+}
+
+#fav-button:hover {
+    opacity: 1;
+}
+
+
+
+

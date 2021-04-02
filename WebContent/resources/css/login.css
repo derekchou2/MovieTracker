@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #AFD275;
+}
+
+label {
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+
+.main-container {
+    display: block;
+    text-align: left;
+    height: 50%;
+    width: 75%;
+    margin: 0 auto;
+    background-color: #C2CAD0;
+}
+
+.form-container {
+    display: block;
+    padding: 2em;
+}
+
+#popcorn-pic {
+    height: 200px;
+    width: 200px;
+    float: right;
+    position: relative;
+    bottom: 115px;
+    left: 110px;
+}
+
+#register {
+    position: relative;
+    top: 30px;
+}
+
+#login-header {
+    position: relative;
+    left: 115px;
+}
+
+#name, #email, #gender, #dob, #register-button, #login-button {
+    margin: .3em .15em;
+}
+

@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #AFD275;
+}
+
+.main-container {
+    display: block;
+    padding-bottom: 25px;
+    text-align: center;
+    height: 50%;
+    width: 50%;
+    margin: 0 auto;
+    background-color: #C2CAD0;
+}
+
+#sad-popcorn {
+    height: 350px;
+    width: 350px;
+    position: relative;
+}
+
+.button-wrapper {
+    width: 25%;
+    margin: auto;
+    text-align: center;
+}
+
+button {
+    margin-top: 25px;
+    position: relative;
+    left: 40px;
+    background-color: #C2CAD0;
+    border-radius: 25px;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+}
