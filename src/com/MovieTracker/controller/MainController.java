@@ -107,6 +107,11 @@ public class MainController {
 		
 		us.addMovieToFavorites(u.getEmail(), m.getId());
 		
+		
+		//Updates session user's favs to user favs in DB, if we go between adding movies from home and favs page it should update
+		User resultUser = us.getUserByEmail(u.getEmail());
+		u.setFavorites(resultUser.getFavorites());
+		
 		return "html/movies";
 	}
 
