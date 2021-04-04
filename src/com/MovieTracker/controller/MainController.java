@@ -85,34 +85,48 @@ public class MainController {
 		
 		System.out.println("__________________________________________________________________");
 		Movie m = new Movie();
+		int mID = -1;
+		
+		System.out.println(description);
 		
 		//if movie exists, query for that movie using request params, take resultlist.get(0), 
 		//call add to favorites with that Movie's id
-		
-		
-		
+		if (ms.movieExists(title, description, link)) {
+			mID = ms.getMovieID(title, description, link);
+			us.addMovieToFavorites(u.getEmail(), mID);
+		}
 		
 		//if movie doesn't exist, set new movie attributes to request params
 		//call add to favorites with new movie's id
-		System.out.println("title: " + title);
-		System.out.println("desc: " + description);
-		System.out.println("link: " + link);
-		m.setDesc(description);
-		m.setLink(link);
-		m.setTitle(title);
-		
-		ms.addMovie(m);
-		
-		System.out.println("ID: " + m.getId());
-		
-		us.addMovieToFavorites(u.getEmail(), m.getId());
-		
+		else {
+			m.setDesc(description);
+			m.setLink(link);
+			m.setTitle(title);
+			
+			ms.addMovie(m);
+			
+			us.addMovieToFavorites(u.getEmail(), m.getId());
+		}
 		
 		//Updates session user's favs to user favs in DB, if we go between adding movies from home and favs page it should update
 		User resultUser = us.getUserByEmail(u.getEmail());
 		u.setFavorites(resultUser.getFavorites());
 		
 		return "html/movies";
+	}
+	
+	@RequestMapping(value= "/removeFromFavorites", method = RequestMethod.GET) //form element action  
+	public String removeFromFavsHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
+			@RequestParam("description") String description, @RequestParam("link") String link) {
+				int mId = ms.getMovieID(title, description, link);
+				
+				us.deleteMovieFromFavorites(u.getEmail(), mId);
+		
+				//Updates session user's favs to user favs in DB, if we go between deleting movies from home and favs page it should update
+				User resultUser = us.getUserByEmail(u.getEmail());
+				u.setFavorites(resultUser.getFavorites());
+		
+		return "html/favorites";
 	}
 
 

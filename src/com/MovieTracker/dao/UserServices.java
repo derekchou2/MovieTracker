@@ -10,6 +10,7 @@ import com.MovieTracker.entity.User;
 
 
 
+
 public class UserServices extends AbstractDAO implements UserI {
 
 	public UserServices() {
@@ -209,6 +210,38 @@ public class UserServices extends AbstractDAO implements UserI {
 		}
 		return result;
 
+	}
+
+	@Override
+	public int deleteMovieFromFavorites(String uEmail, int mId) {
+		int result = 0;
+		
+		
+		try {
+			connect();
+			
+			//DML action, must create transaction
+			em.getTransaction().begin();
+			
+			User u = em.find(User.class, uEmail);
+			
+			Query q = em.createNativeQuery("DELETE FROM movietracker.user_favorites WHERE User_EMAIL = ?1 AND favorites_ID = ?2");
+			q.setParameter(1, uEmail);
+			q.setParameter(2, mId);
+			result = q.executeUpdate();
+			System.out.println("Movie with ID " + mId + " has been deleted");
+
+			
+			em.getTransaction().commit();
+			
+			}catch(Exception e) {
+				result = 0;
+				System.out.println("Movie was not found, nothing was deleted");
+				return result;
+			}finally {
+				dispose();
+			}
+		return result;
 	}
 
 

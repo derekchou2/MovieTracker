@@ -74,6 +74,10 @@ img{
     object-fit: cover;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
 .movie-box {
     overflow-y: auto;
 }
@@ -128,10 +132,6 @@ h2{
     opacity: .1;
 }
 
-#watch-button:hover {
-    opacity: 1;
-}
-
 #fav-button {
     display: flex;
     justify-content: center;
@@ -147,9 +147,33 @@ h2{
     opacity: .1;
 }
 
+#remove-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 8px;
+    border: none;
+    top: 35px;
+    height: 30px;
+    width: 30px;
+    background-color: #555555;
+    color: red;
+    opacity: .1;
+}
+
 #fav-button:hover {
     opacity: 1;
 }
+
+#remove-button:hover {
+    opacity: 1;
+}
+
+#watch-button:hover {
+    opacity: 1;
+}
+
 
 
 

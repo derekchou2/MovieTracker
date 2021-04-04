@@ -19,7 +19,7 @@ public class mainRunner {
 		User u = new User("testtttt@test.com", "name", "pass", "Male", "1995-08-10", new ArrayList<Movie>(), new ArrayList<Movie>());
 		
 		
-		us.addMovieToFavorites("alim@gmail.com", 1);
+		us.deleteMovieFromFavorites("chou.d@northeastern.edu", 3);
 	}
 
 }
