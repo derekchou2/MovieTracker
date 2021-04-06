@@ -1,5 +1,6 @@
 package com.MovieTracker.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -42,6 +43,8 @@ public class User {
 	
 	public User() {
 		super();
+		this.favorites = new ArrayList<Movie>();
+		this.watchlist = new ArrayList<Movie>();
 	}
 	
 	public User(String email, String name, String password, String gender, String dob, List<Movie> f, List<Movie> w) {

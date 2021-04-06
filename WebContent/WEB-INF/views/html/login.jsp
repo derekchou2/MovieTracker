@@ -50,7 +50,7 @@
 		<h1 id="login-header">Login if you already have an account</h1>
 
 		<div class="form-container">
-			<form id="login-form" action="login">
+			<form id="login-form" action="login" method = "post">
 
 				<label for="email">Email:</label>
 				<!--regex in pattern for email validation-->

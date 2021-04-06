@@ -6,6 +6,7 @@ import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -177,7 +178,7 @@ public class MainController {
 
 
 	//user login
-	@RequestMapping(value = "/login", method = RequestMethod.GET) //form element action  
+	@PostMapping(value = "/login") //form element action  
 	public String loginHandler(@RequestParam("email") String email, @RequestParam("password") 
 	String pass, @SessionAttribute("user") User u) {
 		boolean result = us.validateUser(email, pass);
