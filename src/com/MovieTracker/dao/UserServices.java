@@ -191,7 +191,7 @@ public class UserServices extends AbstractDAO implements UserI {
 			int size = results.size();
 			
 			if (size == 0) {
-				u.getFavorites().add(m);
+				u.getWatchlist().add(m);
 				System.out.println("Movie added to watchlist: " + m.getTitle());
 				result = 1;
 			}
@@ -226,6 +226,38 @@ public class UserServices extends AbstractDAO implements UserI {
 			User u = em.find(User.class, uEmail);
 			
 			Query q = em.createNativeQuery("DELETE FROM movietracker.user_favorites WHERE User_EMAIL = ?1 AND favorites_ID = ?2");
+			q.setParameter(1, uEmail);
+			q.setParameter(2, mId);
+			result = q.executeUpdate();
+			System.out.println("Movie with ID " + mId + " has been deleted");
+
+			
+			em.getTransaction().commit();
+			
+			}catch(Exception e) {
+				result = 0;
+				System.out.println("Movie was not found, nothing was deleted");
+				return result;
+			}finally {
+				dispose();
+			}
+		return result;
+	}
+
+	@Override
+	public int deleteMovieFromWatchlist(String uEmail, int mId) {
+int result = 0;
+		
+		
+		try {
+			connect();
+			
+			//DML action, must create transaction
+			em.getTransaction().begin();
+			
+			User u = em.find(User.class, uEmail);
+			
+			Query q = em.createNativeQuery("DELETE FROM movietracker.user_watchlist WHERE User_EMAIL = ?1 AND watchlist_ID = ?2");
 			q.setParameter(1, uEmail);
 			q.setParameter(2, mId);
 			result = q.executeUpdate();

@@ -147,6 +147,20 @@ h2{
     opacity: .1;
 }
 
+#fav-button-in-watchlist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 8px;
+    border: none;
+    height: 30px;
+    width: 30px;
+    background-color: #555555;
+    color: yellow;
+    opacity: .1;
+}
+
 #remove-button {
     display: flex;
     justify-content: center;
@@ -163,6 +177,10 @@ h2{
 }
 
 #fav-button:hover {
+    opacity: 1;
+}
+
+#fav-button-in-watchlist:hover {
     opacity: 1;
 }
 

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import = "com.MovieTracker.entity.User" %>
 <%@ page import = "com.MovieTracker.entity.Movie" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -30,8 +30,8 @@
     	<% 
         	for(int i = 0; i < u.getFavorites().size(); i++) {%>
          	<div class = "movie-box">
-         		<a id = "fav-button" href = "removeFromFavorites?description=<%=u.getFavorites().get(i).getDesc()%>&title=<%=u.getFavorites().get(i).getTitle()%>&link=<%=u.getFavorites().get(i).getLink()%>"><i class="fas fa-times"></i></a>
-         		<a id = "watch-button" href = "#"><i class="fas fa-eye"></i></a>
+         		<a id = "remove-button" href = "removeFromFavorites?description=<%=u.getFavorites().get(i).getDesc()%>&title=<%=u.getFavorites().get(i).getTitle()%>&link=<%=u.getFavorites().get(i).getLink()%>"><i class="fas fa-times"></i></a>
+         		<a id = "watch-button" href = "addToWatchlist?description=<%=u.getFavorites().get(i).getDesc()%>&title=<%=u.getFavorites().get(i).getTitle()%>&link=<%=u.getFavorites().get(i).getLink()%>"><i class="fas fa-eye"></i></a>
          		<p><%=u.getFavorites().get(i).getDesc()%></p>
          		<img src = "https://image.tmdb.org/t/p/w1280<%=u.getFavorites().get(i).getLink()%>">
          		<h2><%=u.getFavorites().get(i).getTitle()%></h2>

@@ -19,7 +19,8 @@ public class mainRunner {
 		User u = new User("testtttt@test.com", "name", "pass", "Male", "1995-08-10", new ArrayList<Movie>(), new ArrayList<Movie>());
 		
 		
-		us.deleteMovieFromFavorites("chou.d@northeastern.edu", 3);
+		//us.addMovieToWatchlist("chou.d@northeastern.edu", 3);
+		us.deleteMovieFromWatchlist("chou.d@northeastern.edu", 3);
 	}
 
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="com.MovieTracker.entity.User"%>
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@
         favButton.href = "addToFavorites?description=" + element.overview + "&title=" + element.title + "&link=" + element.poster_path;
         const watchButton = document.createElement('a');
         watchButton.id = "watch-button";
-        watchButton.href = "addToWatchList";
+        watchButton.href = "addToWatchlist?description=" + element.overview + "&title=" + element.title + "&link=" + element.poster_path;
         watchButton.innerHTML = "<i class=\"fas fa-eye\"></i>"
 
         title.innerHTML = element.title;

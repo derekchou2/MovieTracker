@@ -87,8 +87,6 @@ public class MainController {
 		Movie m = new Movie();
 		int mID = -1;
 		
-		System.out.println(description);
-		
 		//if movie exists, query for that movie using request params, take resultlist.get(0), 
 		//call add to favorites with that Movie's id
 		if (ms.movieExists(title, description, link)) {
@@ -115,6 +113,40 @@ public class MainController {
 		return "html/movies";
 	}
 	
+	@RequestMapping(value= "/addToWatchlist", method = RequestMethod.GET) //form element action  
+	public String addToWatchHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
+			@RequestParam("description") String description, @RequestParam("link") String link) {
+		
+		System.out.println("__________________________________________________________________");
+		Movie m = new Movie();
+		int mID = -1;
+		
+		//if movie exists, query for that movie using request params, take resultlist.get(0), 
+		//call add to favorites with that Movie's id
+		if (ms.movieExists(title, description, link)) {
+			mID = ms.getMovieID(title, description, link);
+			us.addMovieToWatchlist(u.getEmail(), mID);
+		}
+		
+		//if movie doesn't exist, set new movie attributes to request params
+		//call add to favorites with new movie's id
+		else {
+			m.setDesc(description);
+			m.setLink(link);
+			m.setTitle(title);
+			
+			ms.addMovie(m);
+			
+			us.addMovieToWatchlist(u.getEmail(), m.getId());
+		}
+		
+		//Updates session user's favs to user favs in DB, if we go between adding movies from home and favs page it should update
+		User resultUser = us.getUserByEmail(u.getEmail());
+		u.setWatchlist(resultUser.getWatchlist());
+		
+		return "html/movies";
+	}
+	
 	@RequestMapping(value= "/removeFromFavorites", method = RequestMethod.GET) //form element action  
 	public String removeFromFavsHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
 			@RequestParam("description") String description, @RequestParam("link") String link) {
@@ -127,6 +159,20 @@ public class MainController {
 				u.setFavorites(resultUser.getFavorites());
 		
 		return "html/favorites";
+	}
+	
+	@RequestMapping(value= "/removeFromWatchlist", method = RequestMethod.GET) //form element action  
+	public String removeFromWatchlistHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
+			@RequestParam("description") String description, @RequestParam("link") String link) {
+				int mId = ms.getMovieID(title, description, link);
+				
+				us.deleteMovieFromWatchlist(u.getEmail(), mId);
+		
+				//Updates session user's favs to user favs in DB, if we go between deleting movies from home and favs page it should update
+				User resultUser = us.getUserByEmail(u.getEmail());
+				u.setWatchlist(resultUser.getWatchlist());
+		
+		return "html/watch-list";
 	}
 
 

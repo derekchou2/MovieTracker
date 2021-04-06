@@ -14,5 +14,6 @@ public interface UserI {
 	public int addMovieToFavorites(String uEmail, int mId);
 	public int deleteMovieFromFavorites(String uEmail, int mId);
 	public int addMovieToWatchlist(String uEmail, int mId);
+	public int deleteMovieFromWatchlist(String uEmail, int mId);
 
 }
