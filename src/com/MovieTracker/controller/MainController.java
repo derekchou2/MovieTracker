@@ -2,6 +2,8 @@ package com.MovieTracker.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
@@ -36,7 +38,7 @@ public class MainController {
 		return "html/login";
 	}
 	
-	@RequestMapping("/logout") 
+	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logoutHandler() {
 		return "html/login";
 	}
@@ -58,7 +60,10 @@ public class MainController {
 	
 	//register user
 	@RequestMapping("/registerUser") //form element action  
-	public ModelAndView registerHandler(@ModelAttribute User user, @SessionAttribute("user") User u) {
+	public ModelAndView registerHandler(HttpServletRequest request, @ModelAttribute User user, @SessionAttribute("user") User u) {
+		HttpSession session=request.getSession();
+		session.setAttribute("message", "");
+		
 		int result = us.registerUser(user);
 		ModelAndView mav = new ModelAndView();
 		
@@ -81,18 +86,28 @@ public class MainController {
 	}
 	
 	@RequestMapping(value= "/addToFavorites", method = RequestMethod.GET) //form element action  
-	public String addToFavsHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
+	public String addToFavsHandler(HttpServletRequest request, @SessionAttribute("user") User u, @RequestParam("title") String title,
 			@RequestParam("description") String description, @RequestParam("link") String link) {
 		
 		System.out.println("__________________________________________________________________");
+		HttpSession session=request.getSession();
 		Movie m = new Movie();
 		int mID = -1;
+		int result = 0;
 		
 		//if movie exists, query for that movie using request params, take resultlist.get(0), 
 		//call add to favorites with that Movie's id
 		if (ms.movieExists(title, description, link)) {
 			mID = ms.getMovieID(title, description, link);
-			us.addMovieToFavorites(u.getEmail(), mID);
+			result = us.addMovieToFavorites(u.getEmail(), mID);
+			
+			if (result == 1) {
+				session.setAttribute("message", "Movie successfully added to favorites!");
+			}
+			
+			if (result == 0) {
+				session.setAttribute("message", "Movie is already in your favorites page!");
+			}
 		}
 		
 		//if movie doesn't exist, set new movie attributes to request params
@@ -105,20 +120,26 @@ public class MainController {
 			ms.addMovie(m);
 			
 			us.addMovieToFavorites(u.getEmail(), m.getId());
+			
+			session.setAttribute("message", "Movie successfully added to favorites!");
 		}
 		
 		//Updates session user's favs to user favs in DB, if we go between adding movies from home and favs page it should update
 		User resultUser = us.getUserByEmail(u.getEmail());
 		u.setFavorites(resultUser.getFavorites());
 		
+		System.out.println("Message: "+ session.getAttribute("message"));
+		
 		return "html/movies";
 	}
 	
 	@RequestMapping(value= "/addToWatchlist", method = RequestMethod.GET) //form element action  
-	public String addToWatchHandler(@SessionAttribute("user") User u, @RequestParam("title") String title,
+	public String addToWatchHandler(HttpServletRequest request, @SessionAttribute("user") User u, @RequestParam("title") String title,
 			@RequestParam("description") String description, @RequestParam("link") String link) {
 		
 		System.out.println("__________________________________________________________________");
+		HttpSession session = request.getSession();
+		int result = 0;
 		Movie m = new Movie();
 		int mID = -1;
 		
@@ -126,7 +147,15 @@ public class MainController {
 		//call add to favorites with that Movie's id
 		if (ms.movieExists(title, description, link)) {
 			mID = ms.getMovieID(title, description, link);
-			us.addMovieToWatchlist(u.getEmail(), mID);
+			result = us.addMovieToWatchlist(u.getEmail(), mID);
+			
+			if (result == 1) {
+				session.setAttribute("message", "Movie successfully added to watchlist!");
+			}
+			
+			if (result == 0) {
+				session.setAttribute("message", "Movie is already in your watchlist page!");
+			}
 		}
 		
 		//if movie doesn't exist, set new movie attributes to request params
@@ -139,11 +168,15 @@ public class MainController {
 			ms.addMovie(m);
 			
 			us.addMovieToWatchlist(u.getEmail(), m.getId());
+			
+			session.setAttribute("message", "Movie successfully added to watchlist!");
 		}
 		
 		//Updates session user's favs to user favs in DB, if we go between adding movies from home and favs page it should update
 		User resultUser = us.getUserByEmail(u.getEmail());
 		u.setWatchlist(resultUser.getWatchlist());
+		
+		System.out.println("Message: "+ session.getAttribute("message"));
 		
 		return "html/movies";
 	}
@@ -179,8 +212,11 @@ public class MainController {
 
 	//user login
 	@PostMapping(value = "/login") //form element action  
-	public String loginHandler(@RequestParam("email") String email, @RequestParam("password") 
+	public String loginHandler(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") 
 	String pass, @SessionAttribute("user") User u) {
+		HttpSession session=request.getSession();
+		session.setAttribute("message", "");
+		
 		boolean result = us.validateUser(email, pass);
 
 		if (result) {

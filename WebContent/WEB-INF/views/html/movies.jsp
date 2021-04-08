@@ -16,11 +16,12 @@
 
 
 <body>
-	<%
-		User u = (User) session.getAttribute("user");
-	%>
+
+	<% User u = (User) session.getAttribute("user"); %>
+	<% String msg = (String) session.getAttribute("message"); %>
 
 	<header>
+		<h3><%=msg%></h3>
 		<a href="movies" id="welcome" class="header-item"><h1>
 				Welcome
 				<%=u.getName()%>!
@@ -31,9 +32,12 @@
 		</form>
 		<a href="favorites" id="favorites" class="header-item"><h2>Favorites</h2></a>
 		<a href="watch-list" id="watch-list" class="header-item"><h2>Watchlist</h2></a>
-		<a href="logout" id="log-out" class="header-item"><h2>Log Out</h2></a>
+		<a href="logout" id="log-out" class="header-item" method = "get"><h2>Log Out</h2></a>
 	</header>
-	<main id="main"></main>
+	<main id="main">
+		
+	</main>
+	
 
 	<!--putting script tag in head resulted in not being able to use document.getElementByID-->
 	<script> 

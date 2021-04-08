@@ -19,14 +19,14 @@ public class UserServices extends AbstractDAO implements UserI {
 
 	@Override
 	public List<User> getAllUsers() {
-		List<User> users = null;
+		List<User> users = new ArrayList<User>();
 		try {
 			// 1. connect
 			connect();
 			
 			// 2. execute
 			em.getTransaction().begin();
-			users = em.createQuery("SELECT s FROM Student s", User.class).getResultList(); // JPQL
+			users = em.createQuery("SELECT u FROM User u", User.class).getResultList(); // JPQL
 			em.getTransaction().commit();
 			
 		} catch(Exception e) {

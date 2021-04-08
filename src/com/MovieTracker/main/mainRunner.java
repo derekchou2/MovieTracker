@@ -19,8 +19,9 @@ public class mainRunner {
 		User u = new User("testtttt@test.com", "name", "pass", "Male", "1995-08-10", new ArrayList<Movie>(), new ArrayList<Movie>());
 		
 		
-		//us.addMovieToWatchlist("chou.d@northeastern.edu", 3);
-		us.deleteMovieFromWatchlist("chou.d@northeastern.edu", 3);
+		ms.movieExists("Pulp Fiction", "A burger-loving hit man, his philosophical partner,"
+				+ " a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper. "
+				+ "Their adventures unfurl in three stories that ingeniously trip back and forth in time.", "/plnlrtBUULT0rh3Xsjmpubiso3L.jpg");
 	}
 
 }

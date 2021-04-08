@@ -14,7 +14,9 @@
 </head>
 <body>
     <%User u = (User)session.getAttribute("user"); %>
+    <% String msg = (String) session.getAttribute("message"); %>
     <header>
+    	<h3><%=msg%></h3>
         <a href="movies" id = "welcome" class = "header-item"><h1>Welcome <%=u.getName()%>!</h1></a>
         <form id="form">
             <input
