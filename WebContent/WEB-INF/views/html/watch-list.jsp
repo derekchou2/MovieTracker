@@ -60,6 +60,10 @@
         title.setAttribute("name", "title");
         const descript = document.createElement('p');
         descript.setAttribute("name", "descript");
+        
+        title.innerHTML = element.title;
+        descript.innerHTML = element.overview;
+        image.src = IMGPATH + element.poster_path;
 
         const favButton = document.createElement('a');
         favButton.id = "fav-button";
@@ -67,12 +71,10 @@
         favButton.href = "addToFavorites?description=" + element.overview + "&title=" + element.title + "&link=" + element.poster_path;
         const watchButton = document.createElement('a');
         watchButton.id = "watch-button";
-        watchButton.href = "addToWatchList";
+        watchButton.href = "addToWatchlist?description=" + element.overview + "&title=" + element.title + "&link=" + element.poster_path;
         watchButton.innerHTML = "<i class=\"fas fa-eye\"></i>"
 
-        title.innerHTML = element.title;
-        descript.innerHTML = element.overview;
-        image.src = IMGPATH + element.poster_path;
+        
         el.appendChild(favButton);
         el.appendChild(watchButton);
         el.appendChild(descript);
