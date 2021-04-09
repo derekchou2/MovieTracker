@@ -21,12 +21,14 @@ import com.MovieTracker.dao.MovieServices;
 import com.MovieTracker.dao.UserServices;
 import com.MovieTracker.entity.Movie;
 import com.MovieTracker.entity.User;
+import com.MovieTracker.exception.IncompleteMovieException;
 
 @Controller
 @SessionAttributes("user")
 public class MainController {
 	UserServices us = new UserServices();
 	MovieServices ms = new MovieServices();
+	IncompleteMovieException ex = new IncompleteMovieException("The Movie Database API is missing one or more attributes for this movie!");
 	//handlers
 	
 	@ModelAttribute("user")
@@ -134,6 +136,14 @@ public class MainController {
 			@RequestParam("description") String description, @RequestParam("link") String link) {
 		
 		System.out.println("__________________________________________________________________");
+		
+		try {
+			IncompleteMovieException.validate(title,description,link);
+		} catch (IncompleteMovieException e) {
+			System.out.println("This Movie is missing a poster!");
+			e.printStackTrace();
+		}
+		
 		HttpSession session=request.getSession();
 		Movie m = new Movie();
 		int mID = -1;
@@ -182,6 +192,14 @@ public class MainController {
 			@RequestParam("description") String description, @RequestParam("link") String link) {
 		
 		System.out.println("__________________________________________________________________");
+		
+		try {
+			IncompleteMovieException.validate(title,description,link);
+		} catch (IncompleteMovieException e) {
+			System.out.println("This Movie is missing a poster!");
+			e.printStackTrace();
+		}
+		
 		HttpSession session = request.getSession();
 		int result = 0;
 		Movie m = new Movie();

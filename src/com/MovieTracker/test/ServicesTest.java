@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import com.MovieTracker.dao.UserServices;
 import com.MovieTracker.entity.Movie;
+import com.MovieTracker.exception.IncompleteMovieException;
 import com.MovieTracker.dao.MovieServices;
 
 
@@ -73,6 +74,13 @@ public class ServicesTest {
 	@Test
 	void testInvalidGetMovieID() {
 		assertEquals(-1, ms.getMovieID("this", "movie", "doesn't exist"));
+	}
+	
+	@Test
+	void testIncompleteMovie() {
+		assertThrows(IncompleteMovieException.class, () -> {
+			IncompleteMovieException.validate("Movie", "Description", "https://image.tmdb.org/t/p/w1280null");
+	    });
 	}
 
 }
