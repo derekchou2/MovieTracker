@@ -16,9 +16,17 @@
 
 
 <body>
+	
+	
+	
 
-	<% User u = (User) session.getAttribute("user"); %>
-	<% String msg = (String) session.getAttribute("message"); %>
+	
+	<%User u = (User) session.getAttribute("user");
+		System.out.println("Session User: " + u);
+	%>	
+	<%String msg = (String) session.getAttribute("message");%>
+	
+	
 
 	<header>
 		<h3><%=msg%></h3>

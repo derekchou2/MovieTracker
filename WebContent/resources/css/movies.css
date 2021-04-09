@@ -37,8 +37,8 @@ header a h1:hover, header a h2:hover {
 
 #log-out {
     color: white;
-    position: relative;
-    left: 650px;
+    position: absolute;
+    left: 1400px;
 }
 
 header form{
